@@ -1,0 +1,9 @@
+body {
+    direction: rtl;
+    font-family: tahoma;
+}
+
+h2 {
+    color: blue;
+    text-align: center;
+}

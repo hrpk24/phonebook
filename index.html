@@ -9,9 +9,11 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="css/apicss.css">
 </head>
 
 <body>
+
     <style>
         body {
             font-family: iran_sans;
@@ -59,102 +61,72 @@
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <div class="table-responsive">
+
+
                                     <table class="table">
                                         <thead>
-                                            <thead>
-
-                                                <tr>
-                                                    <th>Avatar</th>
-                                                    <th>Name</th>
-                                                    <th>Phone Number</th>
-                                                    <th>Email</th>
-                                                    <th>City</th>
-                                                    <th>Website</th>
-                                                    <th>Lable</th> 
-                                                    <th>Edit</th>
-                                                    <th>Delete</th>
-                                                </tr>
-
-                                            </thead>
-                                            
-                                        <tbody>
-                                            <form action="add.html" method="post">
-
                                             <tr>
-                                                <td><img src="img/apple.png" width="25px" height="20px"></td>
-                                                <td>Mr.Hossein Rahmatian</td>
-                                                <td>09044730977</td>
-                                                <td>hrahmatian80@gmail.com</td>
-                                                <td>Shiraz</td>
-                                                <td>https://google.com</td>
-                                                <td>University</td> 
-                                                <td><button type="button" class="btn btn-warning" onclick="location.href='edit.html'">edit</button></td>
-                                                <td><button type="button" class="btn btn-danger">delete</button></td>
+                                                <!-- <th>gender</th> -->
+                                                <th>Avatar</th>
+                                                <th>Name</th>
+                                                <th>Phone</th>
+                                                <th>Email</th>
+                                                <th>Location</th>
+                                                <th>Cell</th>
+                                                <th>Country</th>
+                                                <!-- <th>Edit</th>
+                                                <th>Delete</th> -->
                                             </tr>
-                                            
-                                            <tr>
-                                                <td><img src="img/google.png" width="25px" height="20px"></td>
-                                                <td>Miss.Mina Ahmadi</td>
-                                                <td>09123456789</td>
-                                                <td>minaahmadi1380@gmail.com</td>
-                                                <td>Tehran</td>
-                                                <td>https://yahoo.com</td>
-                                                <td>Friend</td>
-                                                <td><button type="button" class="btn btn-warning" onclick="location.href='edit.html'">edit</button></td>
-                                                <td><button type="button" class="btn btn-danger">delete</button></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td><img src="img/microsoft.jpeg" width="25px" height="20px"></td>
-                                                <td>Mr.Ali Imani</td>
-                                                <td>09227388888</td>
-                                                <td>Alii.imani@yahoo.com</td>
-                                                <td>Ahvaz</td>
-                                                <td>https://faradars.org/</td>
-                                                <td>Friend</td>
-                                                <td><button type="button" class="btn btn-warning" onclick="location.href='edit.html'">edit</button></td>
-                                                <td><button type="button" class="btn btn-danger">delete</button></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td><img src="img/tesla.png" width="25px" height="20px"></td>
-                                                <td>Miss.Hadis Mohammadi</td>
-                                                <td>09139992831</td>
-                                                <td>hadis1380@gmail.com</td>
-                                                <td>Shiraz</td>
-                                                <td>https://yahoo.com</td>
-                                                <td>University</td>
-                                                <td><button type="button" class="btn btn-warning" onclick="location.href='edit.html'">edit</button></td>
-                                                <td><button type="button" class="btn btn-danger">delete</button></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td><img src="img/netflix.png" width="25px" height="20px"></td>
-                                                <td>MR.Mehdi Cheraghi</td>
-                                                <td>09993438789</td>
-                                                <td>cheraghimehdi@yahoo.com</td>
-                                                <td>Shiraz</td>
-                                                <td>https://faradars.org/</td>
-                                                <td>Family</td>
-                                                <td><button type="button" class="btn btn-warning" onclick="location.href='edit.html'">edit</button></td>
-                                                <td><button type="button" class="btn btn-danger">delete</button></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td><img src="img/nasa.png" width="25px" height="20px"></td>
-                                                <td>Mr.Farhad Majidi</td>
-                                                <td>09123457872</td>
-                                                <td>fmajidi@gmail.com</td>
-                                                <td>Tehran</td>
-                                                <td>https://google.com</td>
-                                                <td>University</td>
-                                                <td><button type="button" class="btn btn-warning" onclick="location.href='edit.html'">edit</button></td>
-                                                <td><button type="button" class="btn btn-danger">delete</button></td>
-                                                </tr>
-                                            </form>
-                                        </tbody>
-                                
+                                        </thead>
+                                        <tbody id="tBody"></tbody>
                                     </table>
+                                    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+                                <script>
+                            
+                                    $(document).ready(function (params) {
+                                        $.ajax({
+                                            url: 'https://randomuser.me/api/?seed=erfan&results=10&page=1',
+                                            type:'GET',
+                                            success: function(response) {
+                                                console.log(response);
+                                                var trHTML = '';
+                                                $.each(response.results, function (i, item) {
+                                                    console.log(item);
+                                                            trHTML +=
+                                                                '<tr><td>'
+                                                                    +  '<img src='+item.picture.thumbnail+'>'
+                                                                + '</td><td>'
+                                                                + item.name.title +''+item.name.first+''+item.name.last
+                                                                + '</td><td>'
+                                                                    + item.phone
+
+                                                                + '</td><td>'
+                                                                + item.email
+                                                                + '</td><td>'
+                                                                    + item.location.street.number +''+item.location.street.name
+                                                                + '</td><td>'
+                                                                    + item.cell
+                                                                + '</td><td>'
+                                                                    + item.nat
+                                                                // + '</td><td>'
+                                                                    
+                                                                // + '</td><td>'
+                                                                    
+                                                                + '</td></tr>';
+                                                        
+                                                    });
+                                                    $('#tBody').append(trHTML);
+                                            },
+                                            error: function() {
+                            
+                                            }
+                                        })
+                                    })
+                            
+                                </script>
+
+
+
                                 </div>
                             </div>
                         </form>
